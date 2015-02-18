@@ -10,6 +10,9 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)startBtn:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UITextField *iterationsCount;
+@property (weak, nonatomic) IBOutlet UITextField *url;
 
 @end
 

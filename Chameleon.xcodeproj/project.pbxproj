@@ -14,6 +14,8 @@
 		479EF96F1A945DFE002850F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479EF96E1A945DFE002850F3 /* Images.xcassets */; };
 		479EF9721A945DFE002850F3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 479EF9701A945DFE002850F3 /* LaunchScreen.xib */; };
 		479EF97E1A945DFE002850F3 /* ChameleonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF97D1A945DFE002850F3 /* ChameleonTests.m */; };
+		479EF98A1A946549002850F3 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF9891A946549002850F3 /* Application.m */; };
+		479EF98D1A946944002850F3 /* PLTController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF98C1A946944002850F3 /* PLTController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		479EF9771A945DFE002850F3 /* ChameleonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChameleonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		479EF97C1A945DFE002850F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		479EF97D1A945DFE002850F3 /* ChameleonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChameleonTests.m; sourceTree = "<group>"; };
+		479EF9881A946549002850F3 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Application.h; sourceTree = "<group>"; };
+		479EF9891A946549002850F3 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Application.m; sourceTree = "<group>"; };
+		479EF98B1A946944002850F3 /* PLTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTController.h; sourceTree = "<group>"; };
+		479EF98C1A946944002850F3 /* PLTController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,7 @@
 		479EF9551A945DFD002850F3 = {
 			isa = PBXGroup;
 			children = (
+				479EF9871A9463ED002850F3 /* Core */,
 				479EF9601A945DFD002850F3 /* Chameleon */,
 				479EF97A1A945DFE002850F3 /* ChameleonTests */,
 				479EF95F1A945DFD002850F3 /* Products */,
@@ -86,6 +93,8 @@
 				479EF9681A945DFD002850F3 /* ViewController.h */,
 				479EF9691A945DFD002850F3 /* ViewController.m */,
 				479EF96B1A945DFD002850F3 /* Main.storyboard */,
+				479EF98B1A946944002850F3 /* PLTController.h */,
+				479EF98C1A946944002850F3 /* PLTController.m */,
 				479EF96E1A945DFE002850F3 /* Images.xcassets */,
 				479EF9701A945DFE002850F3 /* LaunchScreen.xib */,
 				479EF9611A945DFD002850F3 /* Supporting Files */,
@@ -117,6 +126,15 @@
 				479EF97C1A945DFE002850F3 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		479EF9871A9463ED002850F3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				479EF9881A946549002850F3 /* Application.h */,
+				479EF9891A946549002850F3 /* Application.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479EF98A1A946549002850F3 /* Application.m in Sources */,
 				479EF96A1A945DFD002850F3 /* ViewController.m in Sources */,
 				479EF9671A945DFD002850F3 /* AppDelegate.m in Sources */,
+				479EF98D1A946944002850F3 /* PLTController.m in Sources */,
 				479EF9641A945DFD002850F3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
