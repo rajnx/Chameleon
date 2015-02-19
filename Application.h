@@ -12,6 +12,8 @@
 
 @property(strong, nonatomic) NSURL *urlToTest;
 @property(nonatomic) NSInteger noOfIterations;
+@property(strong, nonatomic) NSString *logString;
+
 
 @property(nonatomic, strong) Application *appInstance;
 

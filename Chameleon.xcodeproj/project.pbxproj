@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47518B631A95A5B8003226F0 /* HtmlLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518B621A95A5B8003226F0 /* HtmlLog.m */; };
+		47518B661A95C1D1003226F0 /* ReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47518B651A95C1D1003226F0 /* ReportController.m */; };
+		477E220B1A947F4C00BAB857 /* logocham.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 477E220A1A947F4C00BAB857 /* logocham.jpg */; };
 		479EF9641A945DFD002850F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF9631A945DFD002850F3 /* main.m */; };
 		479EF9671A945DFD002850F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF9661A945DFD002850F3 /* AppDelegate.m */; };
 		479EF96A1A945DFD002850F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479EF9691A945DFD002850F3 /* ViewController.m */; };
@@ -29,6 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		47518B611A95A5B8003226F0 /* HtmlLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HtmlLog.h; sourceTree = "<group>"; };
+		47518B621A95A5B8003226F0 /* HtmlLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HtmlLog.m; sourceTree = "<group>"; };
+		47518B641A95C1D1003226F0 /* ReportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportController.h; sourceTree = "<group>"; };
+		47518B651A95C1D1003226F0 /* ReportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportController.m; sourceTree = "<group>"; };
+		477E220A1A947F4C00BAB857 /* logocham.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logocham.jpg; sourceTree = "<group>"; };
 		479EF95E1A945DFD002850F3 /* Chameleon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chameleon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		479EF9621A945DFD002850F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		479EF9631A945DFD002850F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,6 +77,8 @@
 		479EF9551A945DFD002850F3 = {
 			isa = PBXGroup;
 			children = (
+				47518B611A95A5B8003226F0 /* HtmlLog.h */,
+				47518B621A95A5B8003226F0 /* HtmlLog.m */,
 				479EF9871A9463ED002850F3 /* Core */,
 				479EF9601A945DFD002850F3 /* Chameleon */,
 				479EF97A1A945DFE002850F3 /* ChameleonTests */,
@@ -93,6 +103,8 @@
 				479EF9681A945DFD002850F3 /* ViewController.h */,
 				479EF9691A945DFD002850F3 /* ViewController.m */,
 				479EF96B1A945DFD002850F3 /* Main.storyboard */,
+				47518B641A95C1D1003226F0 /* ReportController.h */,
+				47518B651A95C1D1003226F0 /* ReportController.m */,
 				479EF98B1A946944002850F3 /* PLTController.h */,
 				479EF98C1A946944002850F3 /* PLTController.m */,
 				479EF96E1A945DFE002850F3 /* Images.xcassets */,
@@ -105,6 +117,7 @@
 		479EF9611A945DFD002850F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				477E220A1A947F4C00BAB857 /* logocham.jpg */,
 				479EF9621A945DFD002850F3 /* Info.plist */,
 				479EF9631A945DFD002850F3 /* main.m */,
 			);
@@ -218,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				479EF96D1A945DFD002850F3 /* Main.storyboard in Resources */,
+				477E220B1A947F4C00BAB857 /* logocham.jpg in Resources */,
 				479EF9721A945DFE002850F3 /* LaunchScreen.xib in Resources */,
 				479EF96F1A945DFE002850F3 /* Images.xcassets in Resources */,
 			);
@@ -238,10 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				479EF98A1A946549002850F3 /* Application.m in Sources */,
+				47518B661A95C1D1003226F0 /* ReportController.m in Sources */,
 				479EF96A1A945DFD002850F3 /* ViewController.m in Sources */,
 				479EF9671A945DFD002850F3 /* AppDelegate.m in Sources */,
 				479EF98D1A946944002850F3 /* PLTController.m in Sources */,
 				479EF9641A945DFD002850F3 /* main.m in Sources */,
+				47518B631A95A5B8003226F0 /* HtmlLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +378,8 @@
 		479EF9821A945DFE002850F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Chameleon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,7 +389,8 @@
 		479EF9831A945DFE002850F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Chameleon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -432,6 +450,7 @@
 				479EF9831A945DFE002850F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		479EF9841A945DFE002850F3 /* Build configuration list for PBXNativeTarget "ChameleonTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +459,7 @@
 				479EF9861A945DFE002850F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
