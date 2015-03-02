@@ -22,6 +22,7 @@
     self.noOfIterations = 0;
     self.webView.delegate = self;
     self.isLoadStarted = FALSE;
+    self.loadingCount = 0;
     
     [self analyzePage];
 }
@@ -34,6 +35,13 @@
     self.webViewRequestLoadStart = nil;
     self.webViewLoadFinish = nil;
     self.isLoadStarted = FALSE;
+
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void) analyzePage
@@ -64,6 +72,12 @@
     return TRUE;
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    self.loadingCount--;
+}
+
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     if (self.isLoadStarted == FALSE)
@@ -74,19 +88,29 @@
         
         self.isLoadStarted = TRUE;
     }
+    
+    NSString *url = [[[webView request] URL] absoluteString];
+    self.loadingCount++;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    if (!webView.isLoading)
+    NSString *url = [[[webView request] URL] absoluteString];
+
+    self.loadingCount--;
+
+    if (self.loadingCount > 0)
     {
+        return;
+    }
+    
         self.webViewLoadFinish = [NSDate date];
         NSTimeInterval plt = [self.webViewLoadFinish timeIntervalSinceDate:self.webViewLoadStart];
         self.loadCompleteTime = [NSString stringWithFormat:@"%f", plt];
         [self logResult];
         self.noOfIterations++;
         [self analyzePage];
-    }
+    
 }
 
 -(void) logResult

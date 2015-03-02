@@ -30,16 +30,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.iterationsCount resignFirstResponder];
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.iterationsCount) {
+        [theTextField resignFirstResponder];
+    } else if (theTextField == self.url) {
+        [self.iterationsCount becomeFirstResponder];
+    }
+    return YES;
 }
 
 - (BOOL) validateUrl: (NSString *) candidate {
-    NSString *urlRegEx =
-    @"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-    NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
-    return [urlTest evaluateWithObject:candidate];
+    //NSString *urlRegEx =
+    //@"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+    //NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+    //return [urlTest evaluateWithObject:candidate];
+    return YES;
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
@@ -49,7 +54,9 @@
     appInstance.noOfIterations = [self.iterationsCount.text integerValue];
     appInstance.logString = nil;
     
-    if ([self validateUrl:[appInstance.urlToTest absoluteString]] == FALSE) {
+    NSString *candidate =[appInstance.urlToTest absoluteString];
+
+    if ([self validateUrl: [candidate  stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] == FALSE) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid Url"
                                                         message:@"Please enter in http://www.abc.com format"
                                                        delegate:nil
