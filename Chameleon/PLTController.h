@@ -19,7 +19,6 @@
 @property (strong, nonatomic) NSDate *webViewLoadFinish;
 
 @property (nonatomic) BOOL isLoadStarted;
-@property (nonatomic) int loadingCount;
 
 @property(strong, nonatomic) NSString *loadStartTime;
 @property(strong, nonatomic) NSString *loadCompleteTime;

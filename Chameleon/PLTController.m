@@ -22,7 +22,6 @@
     self.noOfIterations = 0;
     self.webView.delegate = self;
     self.isLoadStarted = FALSE;
-    self.loadingCount = 0;
     
     [self analyzePage];
 }
@@ -52,6 +51,8 @@
 
     if (self.noOfIterations < appInstance.noOfIterations)
     {
+        //[NSThread sleepForTimeInterval:5.0];
+        
         self.webViewRequestLoadStart = [NSDate date];
         [self.webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
@@ -69,17 +70,23 @@
 
 - (BOOL)shouldStartLoadWithRequest:(NSURLRequest *)request
 {
+    NSString *url = [[request URL] absoluteString];
+    NSLog(@"webViewDidStartLoad called with url %@", url);
+    
     return TRUE;
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    self.loadingCount--;
 }
 
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    NSString *url = [[[webView request] URL] absoluteString];
+    
+    NSLog(@"webViewDidStartLoad called with url %@", url);
+    
     if (self.isLoadStarted == FALSE)
     {
         self.webViewLoadStart = [NSDate date];
@@ -88,28 +95,23 @@
         
         self.isLoadStarted = TRUE;
     }
-    
-    NSString *url = [[[webView request] URL] absoluteString];
-    self.loadingCount++;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *url = [[[webView request] URL] absoluteString];
-
-    self.loadingCount--;
-
-    if (self.loadingCount > 0)
-    {
-        return;
-    }
     
+    NSLog(@"webViewDidFinishLoad called with url %@", url);
+    
+    if (!webView.isLoading) {
         self.webViewLoadFinish = [NSDate date];
         NSTimeInterval plt = [self.webViewLoadFinish timeIntervalSinceDate:self.webViewLoadStart];
         self.loadCompleteTime = [NSString stringWithFormat:@"%f", plt];
         [self logResult];
         self.noOfIterations++;
+        
         [self analyzePage];
+    }
     
 }
 
