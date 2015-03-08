@@ -10,7 +10,41 @@
 #import "Application.h"
 #import "HtmlLog.h"
 
+
+
 @implementation PLTController
+
+
+-(void)analyzePage:(NSTimer *)timer
+{
+    [self resetTimersData];
+    Application *appInstance = [Application getInstance];
+    
+    if (self.noOfIterations < appInstance.noOfIterations)
+    {        
+        self.webViewRequestLoadStart = [NSDate date];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
+                                                   cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                               timeoutInterval:120.0]];
+        
+        self.progressLabel.text = [NSString stringWithFormat:@"Analyzing iteration #%d", self.noOfIterations + 1];
+    }
+    else {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+        self.viewReport.enabled = YES;
+        [self.timer invalidate];
+    }
+    
+    
+    if (!self.timer) {
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval: 5.0
+                                                      target: self
+                                                    selector:@selector(analyzePage:)
+                                                    userInfo: nil repeats:YES];
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -23,7 +57,10 @@
     self.webView.delegate = self;
     self.isLoadStarted = FALSE;
     
-    [self analyzePage];
+    self.viewReport.enabled = NO;
+    
+    [self analyzePage:nil];
+    
 }
 
 -(void) resetTimersData
@@ -36,30 +73,12 @@
     self.isLoadStarted = FALSE;
 
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    [[NSURLCache sharedURLCache] setDiskCapacity:0];
-
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(void) analyzePage
-{
-    [self resetTimersData];
-    Application *appInstance = [Application getInstance];
-    
-
-    if (self.noOfIterations < appInstance.noOfIterations)
-    {
-        //[NSThread sleepForTimeInterval:5.0];
-        
-        self.webViewRequestLoadStart = [NSDate date];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
-                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                            timeoutInterval:120.0]];
-    
-        self.progressLabel.text = [NSString stringWithFormat:@"Analyzing iteration #%d", self.noOfIterations + 1];
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [storage cookies]) {
+        [storage deleteCookie:cookie];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,11 +97,14 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
     NSString *url = [[[webView request] URL] absoluteString];
     
     NSLog(@"webViewDidStartLoad called with url %@", url);
@@ -104,13 +126,13 @@
     NSLog(@"webViewDidFinishLoad called with url %@", url);
     
     if (!webView.isLoading) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
         self.webViewLoadFinish = [NSDate date];
         NSTimeInterval plt = [self.webViewLoadFinish timeIntervalSinceDate:self.webViewLoadStart];
         self.loadCompleteTime = [NSString stringWithFormat:@"%f", plt];
         [self logResult];
         self.noOfIterations++;
-        
-        [self analyzePage];
     }
     
 }
@@ -144,5 +166,7 @@
 - (IBAction)reRun:(id)sender
 {
 
+}
+- (IBAction)viewReport:(UIButton *)sender {
 }
 @end

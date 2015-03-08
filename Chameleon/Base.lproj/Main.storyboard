@@ -138,6 +138,7 @@
                                 </state>
                                 <connections>
                                     <action selector="reRun:" destination="l7F-wm-8Dn" eventType="touchUpInside" id="lGW-q7-mpb"/>
+                                    <action selector="viewReport:" destination="l7F-wm-8Dn" eventType="touchUpInside" id="ZRb-QU-S2q"/>
                                     <segue destination="NVh-er-Pij" kind="presentation" id="L93-rY-mGp"/>
                                 </connections>
                             </button>
@@ -158,6 +159,7 @@
                     </view>
                     <connections>
                         <outlet property="progressLabel" destination="Imn-kS-SFQ" id="aqE-IZ-UhV"/>
+                        <outlet property="viewReport" destination="xX6-nS-in2" id="lut-C1-1Sq"/>
                         <outlet property="webView" destination="dZ5-c3-5fW" id="xM2-H9-u5d"/>
                     </connections>
                 </viewController>

@@ -13,6 +13,7 @@
 - (IBAction)reRun:(id)sender;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
+@property (weak, nonatomic) IBOutlet UIButton *viewReport;
 
 @property (strong, nonatomic) NSDate *webViewRequestLoadStart;
 @property (strong, nonatomic) NSDate *webViewLoadStart;
@@ -26,5 +27,7 @@
 @property(nonatomic) int noOfIterations;
 
 @property (strong, nonatomic) HtmlLog *log;
+@property (weak) NSTimer *timer;
+-(void)analyzePage:(NSTimer *)timer;
 
 @end
