@@ -17,13 +17,27 @@
 
 -(void)analyzePage:(NSTimer *)timer
 {
+    float screenWidth;
+    float screenHeight;
+    screenWidth=self.view.bounds.size.width;
+    screenHeight=self.view.bounds.size.height;
+    
     [self resetTimersData];
     Application *appInstance = [Application getInstance];
+
+    NSLog(@"webView InitWithFrame Start");
+
     
-    if (self.noOfIterations < appInstance.noOfIterations)
-    {        
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 50.0, screenWidth, screenHeight)];
+    [self.view addSubview:webView];
+
+    NSLog(@"webView InitWithFrame End");
+
+    webView.delegate = self;
+    
+    if (self.noOfIterations < appInstance.noOfIterations) {        
         self.webViewRequestLoadStart = [NSDate date];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
+        [webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
                                                    cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                timeoutInterval:120.0]];
         
@@ -54,8 +68,6 @@
     [self.log initLog];
     
     self.noOfIterations = 0;
-    self.webView.delegate = self;
-    self.isLoadStarted = FALSE;
     
     self.viewReport.enabled = NO;
     
@@ -78,6 +90,7 @@
     for (NSHTTPCookie *cookie in [storage cookies]) {
         [storage deleteCookie:cookie];
     }
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -109,8 +122,7 @@
     
     NSLog(@"webViewDidStartLoad called with url %@", url);
     
-    if (self.isLoadStarted == FALSE)
-    {
+    if (self.isLoadStarted == FALSE){
         self.webViewLoadStart = [NSDate date];
         NSTimeInterval plt = [self.webViewLoadStart timeIntervalSinceDate:self.webViewRequestLoadStart];
         self.loadStartTime = [NSString stringWithFormat:@"%f", plt];
@@ -126,15 +138,13 @@
     NSLog(@"webViewDidFinishLoad called with url %@", url);
     
     if (!webView.isLoading) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-
         self.webViewLoadFinish = [NSDate date];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSTimeInterval plt = [self.webViewLoadFinish timeIntervalSinceDate:self.webViewLoadStart];
         self.loadCompleteTime = [NSString stringWithFormat:@"%f", plt];
         [self logResult];
         self.noOfIterations++;
     }
-    
 }
 
 -(void) logResult
@@ -152,12 +162,10 @@
 {
     Application *appInstance = [Application getInstance];
 
-    if (self.noOfIterations < appInstance.noOfIterations)
-    {
+    if (self.noOfIterations < appInstance.noOfIterations){
         return NO;
     }
-    else
-    {
+    else{
         appInstance.logString = [self.log getLog];
         return YES;
     }

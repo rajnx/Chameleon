@@ -11,7 +11,6 @@
 
 @interface PLTController : UIViewController<UIWebViewDelegate>
 - (IBAction)reRun:(id)sender;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 @property (weak, nonatomic) IBOutlet UIButton *viewReport;
 
