@@ -26,6 +26,9 @@
 @property(nonatomic) int noOfIterations;
 
 @property (strong, nonatomic) HtmlLog *log;
+
+@property (strong, nonatomic) UIWebView *webView;
+
 @property (weak) NSTimer *timer;
 -(void)analyzePage:(NSTimer *)timer;
 

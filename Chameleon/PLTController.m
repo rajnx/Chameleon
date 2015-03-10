@@ -27,17 +27,21 @@
 
     NSLog(@"webView InitWithFrame Start");
 
+    if (self.webView) {
+        [self.webView removeFromSuperview];
+        self.webView = nil;
+    }
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 50.0, screenWidth, screenHeight)];
-    [self.view addSubview:webView];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 50.0, screenWidth, screenHeight)];
+    [self.view addSubview:self.webView];
 
     NSLog(@"webView InitWithFrame End");
 
-    webView.delegate = self;
+    self.webView.delegate = self;
     
     if (self.noOfIterations < appInstance.noOfIterations) {        
         self.webViewRequestLoadStart = [NSDate date];
-        [webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
+        [self.webView loadRequest:[NSURLRequest requestWithURL:appInstance.urlToTest
                                                    cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                timeoutInterval:120.0]];
         
@@ -64,7 +68,7 @@
 {
     [super viewDidLoad];
     
-    self.log = [HtmlLog new];
+    self.log = [[HtmlLog alloc]init];
     [self.log initLog];
     
     self.noOfIterations = 0;
